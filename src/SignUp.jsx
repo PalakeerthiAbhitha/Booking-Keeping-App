@@ -14,7 +14,7 @@ function SignUp() {
     }
     const handleSubmit = async ()=>{
         try{
-            await axios.post('http://localhost:8000/signup',{
+            await axios.post('https://bookkeeping-frontend.herokuapp.com/signup',{
                 email:state.email,
                 password:state.password
             })
