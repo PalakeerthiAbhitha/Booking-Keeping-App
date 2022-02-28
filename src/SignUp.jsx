@@ -2,29 +2,28 @@ import { Button, Container, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import "./App.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-function Login() {
-  const navigate = useNavigate()
+function SignUp() {
     const [state,setState] = useState({
         email:'',password:''
     })
     const handleChange  = (e)=>{
         setState({...state,[e.target.name]:e.target.value})
     }
-    const handleSubmit = async()=>{
-      try{
-        await axios.post('http://localhost:8000/signin',{
-            email:state.email,
-            password:state.password
-        })
-        navigate('/books')
-    }    
-        catch(err){
-            alert("Email or Password may wrong")
-            console.log("error")
-        }
+    const handleSubmit = async ()=>{
+        try{
+            await axios.post('http://localhost:8000/signup',{
+                email:state.email,
+                password:state.password
+            })
+            alert("Account Created")
+        }    
+            catch(err){
+                alert("Already have an account")
+                console.log("error")
+            }
     }
   return (
     <div className="textcenter">
@@ -37,7 +36,7 @@ function Login() {
             borderRadius: 2,
             width: "25rem",
             textAlign: "center"}}>
-          <Typography sx={{ fontWeight: "600" }}>Login </Typography>
+          <Typography sx={{ fontWeight: "600" }}>Sign up</Typography>
           <TextField
             sx={{ m: 1, width: "85%" }}
             id="outlined-basic"
@@ -51,13 +50,16 @@ function Login() {
             name="password" value={state.password}
             variant="outlined" onChange={handleChange}
           />
+          <Link to="/login" style={{ textDecoration: "none" }}>
             <Button onClick={handleSubmit} variant="outlined" sx={{ mt: 1.5 }}>
-Login </Button>
-          <Typography sx={{p:1}}> <Link to='/'>Click here To SignUp</Link></Typography>
+              Create an Account
+            </Button>
+          </Link>
+          <Typography sx={{py:2}}>Already Have and account? <Link to='/login'>Click here To login</Link></Typography>
         </Box>
       </Container>
     </div>
   );
 }
 
-export default Login;
+export default SignUp;

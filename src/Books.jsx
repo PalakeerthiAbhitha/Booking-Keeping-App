@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Box from '@mui/material/Box';
-// import img1 from './img.jpeg'
 import library from './library.png'
+import Dashboard from './Dashboard'
+
 function Book() {
   let [searchTerm, setState] = useState("");
   let [data, setData] = useState([]);
@@ -19,13 +20,13 @@ function Book() {
 
  
   return (
-
-
+<>
+<Dashboard/>
     
-    <div className="App">
+    <div className="App" style={{marginTop:'10px'}}>
       <input type="text" placeholder="search..." onChange={(event)=>{
         setState(event.target.value);
-      }}/>
+      }} style={{width:'200px' ,heigth:'35px'}}/>
 
       {data
         .filter(
@@ -48,7 +49,7 @@ function Book() {
             <Box>
             <div  style={{ border: "2px solid black", margin: "10px" }} key={key}>
                <p>
-                 <img src={library}/>
+                 <img src={library} alt="library" style={{width:'200px'}}/>
                </p>
 
               <p>Book Name : {value.title}</p>
@@ -66,6 +67,7 @@ function Book() {
 
         })}
     </div>
+    </>
   );
 }
 
